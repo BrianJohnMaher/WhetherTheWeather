@@ -1,4 +1,4 @@
-var APIkey = '1f5fe3c07897e528af5a10f8fb5ea2e7';
+ var APIkey = '1f5fe3c07897e528af5a10f8fb5ea2e7';
 
 // when I'm using this app, and search for the weather conditions currently: i am also given the future temperature and element possibilities.
 
@@ -36,7 +36,7 @@ function runCurrentWeather(city) {
         var heading = document.createElement('h2')
 
         // add the text content to the elements
-        heading.textContent = data.name + ' ' + new Date(data.dt * 1000).toLocaleDateString()
+        heading.textContent = data.name + ' ' + new Date(data.dt * 1000).toLocalDateString()
 
         // append the elements to the current weather container
         currentWeatherContainer.append(heading)
@@ -49,7 +49,17 @@ function runForecast(city) {
     fetch(URL).then(function (response) {
         return response.json()
     }).then(function (data) {
+        runForecastContainer.innerHTML = ''; 
+
         console.log(data);
+        console.log('cityName', data.name);
+        
+// Need to know how to change this for the forecast 
+        // console.log('temp', data.main.temp);
+        // console.log('humidity', data.main.humidity);
+        // console.log('wind', data.wind.speed);
+        // console.log('Weather Icon', data.weather[0].icon);
+        // console.log('date', new Date(data.dt * 1000).toLocaleDateString());
     });
 }
 
