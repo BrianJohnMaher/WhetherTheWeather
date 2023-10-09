@@ -6,15 +6,25 @@ var APIkey = '1f5fe3c07897e528af5a10f8fb5ea2e7';
 
 // TODO: grab the user input, create an event listener on the search button and console.log the value from the input
 var searchBtn = document.querySelector("#search")
-var cityInput = document.querySelector("#cityName");
+var cityInput = document.querySelector("#cityName")
 var currentWeatherContainer = document.querySelector('#currentWeather')
 var forecastContainer = document.querySelector('#forecast')
+var searchHistoryContainer = document.querySelector('#history');
+var searchHistory = JSON.parse(localStorage.getItem('searchHistory')) || []
 
 function userInput() {
     var city = cityInput.value
     runCurrentWeather(city);
     runForecast(city);
 }
+
+function addItemToStorage(name){
+    searchHistory.push(name)
+
+    localStorage.setItem('searchHistory', JSON.stringify(searchHistory))
+}
+
+
 
 function runCurrentWeather(city) {
     var URL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIkey + "&units=imperial"
@@ -23,6 +33,8 @@ function runCurrentWeather(city) {
         return response.json()
     }).then(function (data) {
         currentWeatherContainer.innerHTML = '';
+
+        addItemToStorage(data.name)
 
         // console.log(data);
         // console.log('cityName', data.name);
@@ -69,14 +81,21 @@ function runForecast(city) {
             var div = document.createElement('div')
             var date = document.createElement('h3')
             var temp = document.createElement('p')
+            var wind = document.createElement('p')
+            var humidity = document.createElement('p')
 
 
             // add the text content to the elements
-            temp.textContent = forecastArray[i].main.temp_max
-            date.textContent = new Date(forecastArray[i].dt_txt).toLocaleDateString()
+            temp.textContent = 'Temp: ' + forecastArray[i].main.temp_max+ '°';
+            wind.textContent =  'Wind: '+forecastArray[i].wind.speed+ 'mph';
+            humidity.textContent = 'Humidity: ' + forecastArray[i].main.humidity + '%';
+            date.textContent = new Date(forecastArray[i].dt_txt).toLocaleDateString();
+
+
+            div.setAttribute('class', 'col-2 card m-2')
 
             // append the elements to the forecastContainer
-            div.append(temp, date)
+            div.append(date, temp, wind, humidity)
             forecastContainer.append(div)
 
         }
@@ -90,4 +109,7 @@ function runForecast(city) {
     });
 }
 
+
+
 searchBtn.addEventListener('click', userInput)
+// searchHistoryContainer.addEventListener('click', SearchHistory);
