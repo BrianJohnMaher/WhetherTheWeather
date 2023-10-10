@@ -2,15 +2,26 @@
 * {
     padding: 0;
     margin: 0;
-    
 }
+
 body {
     background-color: aliceblue;
-
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
- main{
+main {
     max-width: 1440px;
+    flex-grow: 1;
 }
 
- 
+/* FOOTER */
+footer {
+    background-color: aliceblue;
+    padding: 7px 3%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: black;
+}

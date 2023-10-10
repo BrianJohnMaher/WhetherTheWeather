@@ -1,12 +1,28 @@
 # WhetherTheWeather
-weather_app
 
-GIVEN a weather dashboard with form inputs
-WHEN I search for a city
-THEN I am presented with current and future conditions for that city and that city is added to the search history
-WHEN I view current weather conditions for that city
-THEN I am presented with the city name, the date, an icon representation of weather conditions, the temperature, the humidity, and the wind speed
-WHEN I view future weather conditions for that city
-THEN I am presented with a 5-day forecast that displays the date, an icon representation of weather conditions, the temperature, the wind speed, and the humidity
-WHEN I click on a city in the search history
-THEN I am again presented with current and future conditions for that city
+## Description
+
+This assignment tasked us to create a weather app. 
+This weather app provides you with the current weather, and future forecast of a specific city - upon searching.
+
+## Repository
+
+Link to deployed code:
+https://brianjohnmaher.github.io/WhetherTheWeather/
+
+## Technologies
+
+ Html and CSS is utilized, in the structure and style, of this app. 
+ Flexbox via CSS is utilized, in aligning and justifying the content structure.
+ Javascript is the primary mechanism, operating the dynamic parts of the app.
+ Localstorage is used to store the search-history, od given-city.
+
+## Mock-Up
+
+The following images, and video show the web application's appearance and functionality:
+
+<a id="WhetherTheWeather Main" href="./assets/WhetherTheWeather_Main.jpeg">Main Page</a>
+
+<a id="WhetherTheWeather Search" href="./assets/WhetherTheWeather_Search.jpeg">Search</a>
+
+<a id="WhetherTheWeather Clip" href="./assets/WhetherTheWeather_Clip.mov">WhetherTheWeather in action</a>
