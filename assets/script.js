@@ -9,22 +9,47 @@ var searchBtn = document.querySelector("#search")
 var cityInput = document.querySelector("#cityName")
 var currentWeatherContainer = document.querySelector('#currentWeather')
 var forecastContainer = document.querySelector('#forecast')
-var searchHistoryContainer = document.querySelector('#history');
+var searchHistoryContainer = document.querySelector('#searchHistory');
 var searchHistory = JSON.parse(localStorage.getItem('searchHistory')) || []
 
 function userInput() {
     var city = cityInput.value
+    runData(city)
+}
+
+function runData(city){
     runCurrentWeather(city);
     runForecast(city);
 }
 
-function addItemToStorage(name){
-    searchHistory.push(name)
+runAtStart()
+function runAtStart(){
+   for (let i = 0; i < searchHistory.length; i++) {
+    
+    appendToSearchHistory(searchHistory[i])
+   } 
+}
+
+function addItemToStorage(name) {
+
+
+    if (!searchHistory.includes(name)) {
+        // Add the city to the search history
+        searchHistory.push(name);
+        appendToSearchHistory(name)
+    }
 
     localStorage.setItem('searchHistory', JSON.stringify(searchHistory))
 }
 
-
+function appendToSearchHistory(x) {
+    var cityTitle = document.createElement ('button')
+    cityTitle.textContent = x;
+    cityTitle.addEventListener('click', function (){
+        runData(this.textContent)
+    })
+    searchHistoryContainer.append(cityTitle)
+}
 
 function runCurrentWeather(city) {
     var URL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIkey + "&units=imperial"
@@ -50,7 +75,8 @@ function runCurrentWeather(city) {
         var temp = document.createElement('p')
         var humidity = document.createElement('p')
         var wind = document.createElement('p')
-
+        var imgEl = document.createElement('img')
+        imgEl.setAttribute('src', "http://openweathermap.org/img/w/" + data.weather[0].icon + ".png")
 
 
         // add the text content to the elements
@@ -62,7 +88,7 @@ function runCurrentWeather(city) {
 
 
         // append the elements to the current weather container
-        currentWeatherContainer.append(heading, temp, humidity, wind)
+        currentWeatherContainer.append(heading, imgEl, temp, humidity, wind)
     });
 }
 
@@ -77,17 +103,20 @@ function runForecast(city) {
         console.log(forecastArray);
 
         for (let i = 0; i < forecastArray.length; i++) {
+            console.log(forecastArray[i]);
             // create the elements that we will use for oue forecast boxes
             var div = document.createElement('div')
             var date = document.createElement('h3')
             var temp = document.createElement('p')
             var wind = document.createElement('p')
             var humidity = document.createElement('p')
-
+            var imgEl = document.createElement('img')
+            imgEl.setAttribute('src', "http://openweathermap.org/img/w/" + forecastArray[i].weather[0].icon + ".png")
+            imgEl.style.width = '40px'
 
             // add the text content to the elements
-            temp.textContent = 'Temp: ' + forecastArray[i].main.temp_max+ '°';
-            wind.textContent =  'Wind: '+forecastArray[i].wind.speed+ 'mph';
+            temp.textContent = 'Temp: ' + forecastArray[i].main.temp_max + '°';
+            wind.textContent = 'Wind: ' + forecastArray[i].wind.speed + 'mph';
             humidity.textContent = 'Humidity: ' + forecastArray[i].main.humidity + '%';
             date.textContent = new Date(forecastArray[i].dt_txt).toLocaleDateString();
 
@@ -95,7 +124,7 @@ function runForecast(city) {
             div.setAttribute('class', 'col-2 card m-2')
 
             // append the elements to the forecastContainer
-            div.append(date, temp, wind, humidity)
+            div.append(date, imgEl, temp, wind, humidity)
             forecastContainer.append(div)
 
         }
