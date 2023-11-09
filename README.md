@@ -21,8 +21,9 @@ https://brianjohnmaher.github.io/WhetherTheWeather/
 
 The following images, and video show the web application's appearance and functionality:
 
-<a id="WhetherTheWeather Main" href="./assets/WhetherTheWeather_Main.jpeg">Main Page</a>
+![WhetherTheWeather Main] (![Alt text](assets/WhetherTheWeather_Main.jpeg))
 
-<a id="WhetherTheWeather Search" href="./assets/WhetherTheWeather_Search.jpeg">Search</a>
+![WhetherTheWeather Search] ![Alt text](assets/WhetherTheWeather_Search.jpeg)
 
-<a id="WhetherTheWeather Clip" href="./assets/WhetherTheWeather_Clip.mov">WhetherTheWeather in action</a>
+![WhetherTheWeather; search history and icons] ![Alt text](assets/Whether_searchHistory.jpeg)
+
